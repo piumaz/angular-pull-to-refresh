@@ -73,9 +73,14 @@ export class PullToRefreshComponent implements OnInit {
   maxFirstPull = 60;
 
   /**
+   * posizione Y dell'animazione finale
+   */
+  animateY = 80;
+
+  /**
    * Spostamento in pixel che attiva il refresh
    */
-  pullToRefresh = 80;
+  pullToRefresh = 90;
 
   radiusLeft = 0;
   radiusRight = 0;
@@ -193,7 +198,7 @@ export class PullToRefreshComponent implements OnInit {
 
     if ( this.active ) {
       this.spin = true;
-      this.pull = this.pullToRefresh;
+      this.pull = this.animateY;
 
       document.dispatchEvent(new Event('pullrefresh'));
       this.refreshService.pull();
@@ -204,7 +209,7 @@ export class PullToRefreshComponent implements OnInit {
 
         this.reset();
 
-      }, 500);
+      }, 1500);
 
     } else {
       this.reset();
