@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-test": {
+    "angular-pull-to-refresh": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-test",
+            "outputPath": "dist/angular-pull-to-refresh",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-test:build"
+            "browserTarget": "angular-pull-to-refresh:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-test:build:production"
+              "browserTarget": "angular-pull-to-refresh:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-test:build"
+            "browserTarget": "angular-pull-to-refresh:build"
           }
         },
         "test": {
@@ -115,15 +115,50 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-test:serve"
+            "devServerTarget": "angular-pull-to-refresh:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-test:serve:production"
+              "devServerTarget": "angular-pull-to-refresh:serve:production"
             }
           }
         }
       }
+    },
+    "pull-to-refresh": {
+      "projectType": "library",
+      "root": "projects/pull-to-refresh",
+      "sourceRoot": "projects/pull-to-refresh/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/pull-to-refresh/tsconfig.lib.json",
+            "project": "projects/pull-to-refresh/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pull-to-refresh/src/test.ts",
+            "tsConfig": "projects/pull-to-refresh/tsconfig.spec.json",
+            "karmaConfig": "projects/pull-to-refresh/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pull-to-refresh/tsconfig.lib.json",
+              "projects/pull-to-refresh/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
-  "defaultProject": "angular-test"
+  "defaultProject": "angular-pull-to-refresh"
 }

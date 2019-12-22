@@ -1,0 +1,23 @@
+
+<div class="pull" [ngStyle]="{'transform': 'translateY(' + pull + 'px)'}" [hidden]="disabled || pullFirst">
+
+    <span class="rotate" [ngStyle]="{'transform': 'rotate(' + rotation + 'deg)'}">
+
+        <span class="spinner" [class.spin-animation]="spin" [ngStyle]="{'opacity': (rotation/360) - 0.1}">
+
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                <g>
+                    <path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#353535" stroke-width="10" ></path>
+                    <path d="M49 3L49 27L61 15L49 3" fill="#353535" stroke="#353535" stroke-width="4"></path>
+                </g>
+            </svg>
+
+        </span>
+
+    </span>
+
+</div>
+
+<div class="pull first"
+     [ngStyle]="{'transform': 'translateY(' + pullFirst + 'px)', 'border-bottom-right-radius': radiusRight + '%', 'border-bottom-left-radius': radiusLeft + '%'}"
+     [hidden]="disabled || pull"></div>
