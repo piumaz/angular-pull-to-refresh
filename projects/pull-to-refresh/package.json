@@ -1,6 +1,19 @@
 {
-  "name": "pull-to-refresh",
+  "name": "@piumaz/pull-to-refresh",
+  "description": "Provides an Angular component and service, for the Pull-To-Refresh feature like on Chrome",
   "version": "0.0.1",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piumaz/angular-pull-to-refresh.git"
+  },
+  "keywords": ["pull-to-refresh", "angular", "rxjs", "typescript"],
+  "author": "Daniele Piumatti <piumaz@hotmail.it> (http://www.piumaz.it)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piumaz/angular-pull-to-refresh/issues"
+  },
+  "homepage": "https://github.com/piumaz/angular-pull-to-refresh",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
