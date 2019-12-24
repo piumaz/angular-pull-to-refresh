@@ -27,7 +27,7 @@ export class PullToRefreshComponent implements OnInit {
   /**
    * Stato attivazione
    */
-  active = false;
+  activated = false;
 
   /**
    * Elemento che riceve lo scroll
@@ -116,7 +116,7 @@ export class PullToRefreshComponent implements OnInit {
 
   onTouchStart($e) {
 
-    if (this.disabled) {
+    if (this.disabled || this.activated) {
       return;
     }
 
@@ -181,7 +181,7 @@ export class PullToRefreshComponent implements OnInit {
 
         this.rotation = (360 * this.pull) / this.maxPull;
 
-        this.active = (this.pull >= this.pullToRefresh);
+        this.activated = (this.pull >= this.pullToRefresh);
 
       }
 
@@ -196,7 +196,7 @@ export class PullToRefreshComponent implements OnInit {
       return;
     }
 
-    if ( this.active ) {
+    if ( this.activated ) {
       this.spin = true;
       this.pull = this.animateY;
 
@@ -226,7 +226,7 @@ export class PullToRefreshComponent implements OnInit {
 
     this.rotation = 0;
     this.spin = false;
-    this.active = false;
+    this.activated = false;
     this.pull = 0;
     this.pullFirst = 0;
   }
