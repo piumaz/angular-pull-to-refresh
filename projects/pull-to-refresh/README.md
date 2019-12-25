@@ -1,24 +1,59 @@
-# PullToRefresh
+# @piumaz/pull-to-refresh
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
 
-## Code scaffolding
+## Component
 
-Run `ng generate component component-name --project pull-to-refresh` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project pull-to-refresh`.
-> Note: Don't forget to add `--project pull-to-refresh` or else it will be added to the default project in your `angular.json` file. 
+### Based on document scrollTop:
+Template
+```
+<pull-to-refresh></pull-to-refresh>
 
-## Build
+<h1>Pull-To-Refresh example</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+```
+Style
+```
+body {
+  overscroll-behavior-y: none;
+}
+```
+### Based on target element .scrollTop property:
 
-Run `ng build pull-to-refresh` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+<pull-to-refresh [config]="{
+    'target: '#content'
+}"></pull-to-refresh>
 
-## Publishing
+<div id="content">
+    <h1>Pull-To-Refresh example</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+```
+```
+body {
+  overscroll-behavior-y: none;
+  overflow: hidden;
+}
 
-After building your library with `ng build pull-to-refresh`, go to the dist folder `cd dist/pull-to-refresh` and run `npm publish`.
+#content {
+  overflow-y: scroll;
+  height:100vh;
+}
+```
+## Service
+```
+import { PullToRefreshService } from 'pull-to-refresh';
+```
 
-## Running unit tests
+```
+export class AppComponent {
 
-Run `ng test pull-to-refresh` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  constructor(private pullToRefreshService: PullToRefreshService) {
 
-## Further help
+    pullToRefreshService.refresh$().subscribe(() => {
+      console.log('refresh');
+    });
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  }
+}
+```

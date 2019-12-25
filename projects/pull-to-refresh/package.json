@@ -1,5 +1,5 @@
 {
-  "name": "@piumaz/pull-to-refresh",
+  "name": "pull-to-refresh",
   "description": "Provides an Angular component and service, for the Pull-To-Refresh feature like on Chrome",
   "version": "0.0.1",
   "main": "index.js",

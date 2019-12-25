@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PullToRefreshService } from 'pull-to-refresh';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  constructor(private pullToRefreshService: PullToRefreshService) {
+
+    pullToRefreshService.refresh$().subscribe(() => {
+      console.log('refresh');
+    });
+
+  }
 }

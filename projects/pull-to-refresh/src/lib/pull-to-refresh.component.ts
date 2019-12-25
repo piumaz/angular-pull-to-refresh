@@ -3,7 +3,7 @@ import {Component, OnInit, EventEmitter, Output, Input, ElementRef, HostListener
 import {PullToRefreshService} from './pull-to-refresh.service';
 
 
-interface PullToRefreshConfigInterface {
+export interface PullToRefreshConfigInterface {
   target: string;
 }
 
