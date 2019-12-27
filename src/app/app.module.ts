@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {PullToRefreshModule} from 'pull-to-refresh';
+
+import {PullToRefreshModule} from '@piumaz/pull-to-refresh';
 
 @NgModule({
   declarations: [

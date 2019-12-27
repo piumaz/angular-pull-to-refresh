@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PullToRefreshService } from 'pull-to-refresh';
+import { PullToRefreshService } from '@piumaz/pull-to-refresh';
 
 @Component({
   selector: 'app-root',
