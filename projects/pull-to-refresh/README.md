@@ -1,12 +1,12 @@
 # @piumaz/pull-to-refresh
 
-Provides an Angular component and service, for the Pull-To-Refresh feature like on Chrome
+It provides an Angular component and a service, for the Pull-To-Refresh feature.
 
 `npm install @piumaz/pull-to-refresh`
 ____
 ## Module
 
-Import PullToRefreshModule in AppModule:
+Import PullToRefreshModule in your AppModule:
 ```
 import {PullToRefreshModule} from '@piumaz/pull-to-refresh';
 
@@ -20,9 +20,9 @@ export class AppModule { }
 
 ## Component
 
-Add component in your template, for example in _app.component.html_.
+Add the component in your template, for example in _app.component.html_,
 
-Based on document scrollTop:
+based on document scrollTop:
 ```
 <pull-to-refresh></pull-to-refresh>
 
@@ -36,7 +36,7 @@ body {
 }
 ```
 
-Or based on target element .scrollTop property:
+or based on target element .scrollTop property:
 
 ```
 <pull-to-refresh [config]="{
@@ -61,14 +61,15 @@ body {
 }
 ```
 
-Component has 'refresh' output property, emit when user pull to refresh:
+The component has a 'refresh' output property, emitted when user pulls to refresh:
 
 ```
 <pull-to-refresh (refresh)='myRefreshFunction()'></pull-to-refresh>
 ```
 
 ## Service
-Import and use PullToRefreshService for subscribe to observable refresh$:
+
+Import and use PullToRefreshService for subscribing to observable refresh$:
 ```
 import { PullToRefreshService } from 'pull-to-refresh';
 ```
@@ -86,7 +87,8 @@ export class AppComponent {
 }
 ```
 ## Event
-An event dispatch too, when user pull to refresh:
+
+An event dispatches too, when user pulls to refresh:
 
 ```
 export class AppComponent {
