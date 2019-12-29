@@ -200,7 +200,7 @@ export class PullToRefreshComponent implements OnInit {
       this.spin = true;
       this.pull = this.animateY;
 
-      document.dispatchEvent(new Event('pullrefresh'));
+      document.dispatchEvent(new Event('pull-to-refresh'));
       this.refreshService.pull();
       this.refresh.emit();
 

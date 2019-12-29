@@ -20,7 +20,7 @@ export class AppModule { }
 
 ## Component
 
-Add component in _app.component.html_
+Add component in your template, for example in _app.component.html_.
 
 Based on document scrollTop:
 ```
@@ -61,8 +61,14 @@ body {
 }
 ```
 
+Component has 'refresh' output property, emit when user pull to refresh:
+
+```
+<pull-to-refresh (refresh)='myRefreshFunction()'></pull-to-refresh>
+```
 
 ## Service
+Import and use PullToRefreshService for subscribe to observable refresh$:
 ```
 import { PullToRefreshService } from 'pull-to-refresh';
 ```
@@ -73,11 +79,25 @@ export class AppComponent {
   constructor(private pullToRefreshService: PullToRefreshService) {
 
     pullToRefreshService.refresh$().subscribe(() => {
-      console.log('refresh');
+      console.log('refresh by observable');
     });
 
   }
 }
 ```
+## Event
+An event dispatch too, when user pull to refresh:
 
+```
+export class AppComponent {
+
+  constructor(private pullToRefreshService: PullToRefreshService) {
+
+    document.addEventListener('pull-to-refresh', () => {
+      console.log('refresh by eventListener');
+    });
+
+  }
+}
+```
 

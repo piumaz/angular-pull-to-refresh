@@ -11,8 +11,11 @@ export class AppComponent {
   constructor(private pullToRefreshService: PullToRefreshService) {
 
     pullToRefreshService.refresh$().subscribe(() => {
-      console.log('refresh');
+      console.log('refresh by observable');
     });
 
+    document.addEventListener('pull-to-refresh', () => {
+      console.log('refresh by eventListener');
+    });
   }
 }
