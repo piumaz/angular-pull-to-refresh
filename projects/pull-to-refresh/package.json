@@ -1,7 +1,7 @@
 {
   "name": "pull-to-refresh",
-  "description": "Provides an Angular component and service, for the Pull-To-Refresh feature like on Chrome",
-  "version": "0.0.1",
+  "description": "It provides an Angular component and a service, for the Pull-To-Refresh feature.",
+  "version": "1.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
