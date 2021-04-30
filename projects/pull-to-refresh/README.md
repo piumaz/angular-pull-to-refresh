@@ -40,7 +40,7 @@ or based on target element .scrollTop property:
 
 ```
 <pull-to-refresh [config]="{
-    'target: '#content'
+    target: '#content'
 }"></pull-to-refresh>
 
 <div id="content">
