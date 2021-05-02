@@ -17,8 +17,7 @@ import {PullToRefreshComponent} from './pull-to-refresh.component';
 })
 export class PullToRefreshModule {
 
-    public static forRoot(environment: any): ModuleWithProviders {
-
+    public static forRoot(environment: any): ModuleWithProviders<PullToRefreshModule> {
         return {
             ngModule: PullToRefreshModule
         }
