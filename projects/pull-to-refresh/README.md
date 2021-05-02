@@ -1,6 +1,7 @@
 # @piumaz/pull-to-refresh
 
 It provides an Angular component and a service, for the Pull-To-Refresh feature.
+You can listen it from component output, observable or event.
 
 `npm install @piumaz/pull-to-refresh`
 ____
@@ -20,9 +21,7 @@ export class AppModule { }
 
 ## Component
 
-Add the component in your template, for example in _app.component.html_,
-
-based on document scrollTop:
+Add the component in your template.
 ```
 <pull-to-refresh></pull-to-refresh>
 
@@ -30,42 +29,12 @@ based on document scrollTop:
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 ```
 
-```
-body {
-  overscroll-behavior-y: none;
-}
-```
-
-or based on target element .scrollTop property:
-
-```
-<pull-to-refresh [config]="{
-    target: '#content'
-}"></pull-to-refresh>
-
-<div id="content">
-    <h1>Pull-To-Refresh example</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
-```
-
-```
-body {
-  overscroll-behavior-y: none;
-  overflow: hidden;
-}
-
-#content {
-  overflow-y: scroll;
-  height:100vh;
-}
-```
-
-The component has a 'refresh' output property, emitted when user pulls to refresh:
-
-```
-<pull-to-refresh (refresh)='myRefreshFunction()'></pull-to-refresh>
-```
+Type | Name | Default
+--- | --- | ---
+@Input | color | #353535
+@Input | target | body
+@Input | disabled | false
+@Output | refresh |
 
 ## Service
 
@@ -93,7 +62,7 @@ An event dispatches too, when user pulls to refresh:
 ```
 export class AppComponent {
 
-  constructor(private pullToRefreshService: PullToRefreshService) {
+  constructor() {
 
     document.addEventListener('pull-to-refresh', () => {
       console.log('refresh by eventListener');
