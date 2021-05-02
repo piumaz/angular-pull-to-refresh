@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "pull-to-refresh": [
+      "@piumaz/pull-to-refresh": [
         "dist/pull-to-refresh"
       ],
-      "pull-to-refresh/*": [
+      "@piumaz/pull-to-refresh/*": [
         "dist/pull-to-refresh/*"
       ]
     }

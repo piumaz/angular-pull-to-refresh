@@ -17,9 +17,6 @@ export class PullToRefreshService {
   }
 
   public pull(): void {
-    // console.log('Refresh');
     this.refresh.next(true);
   }
-
-
 }

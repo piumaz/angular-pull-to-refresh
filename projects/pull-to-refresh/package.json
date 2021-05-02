@@ -1,13 +1,13 @@
 {
   "name": "pull-to-refresh",
   "description": "It provides an Angular component and a service, for the Pull-To-Refresh feature.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/piumaz/angular-pull-to-refresh.git"
   },
-  "keywords": ["pull-to-refresh", "angular", "rxjs", "typescript"],
+  "keywords": ["pulltorefresh","pull-to-refresh", "angular", "rxjs", "typescript"],
   "author": "Daniele Piumatti <piumaz@hotmail.it> (http://www.piumaz.it)",
   "license": "ISC",
   "bugs": {
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/piumaz/angular-pull-to-refresh",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/common": "^11.2.12",
+    "@angular/core": "^11.2.12"
   }
 }

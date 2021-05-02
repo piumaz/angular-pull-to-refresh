@@ -2,11 +2,6 @@
 import {Component, OnInit, EventEmitter, Output, Input, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {PullToRefreshService} from './pull-to-refresh.service';
 
-
-export interface PullToRefreshConfigInterface {
-  target: string;
-}
-
 @Component({
   selector: 'pull-to-refresh',
   templateUrl: './pull-to-refresh.component.html',
@@ -14,11 +9,9 @@ export interface PullToRefreshConfigInterface {
 })
 export class PullToRefreshComponent implements OnInit {
 
-  @Input('config') config: PullToRefreshConfigInterface = {
-    target: 'body'
-  };
-
-  @Input('disabled') disabled: boolean;
+  @Input() color: string = '#353535';
+  @Input() target: string = 'body';
+  @Input() disabled: boolean = false;
 
   @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
 
@@ -95,7 +88,7 @@ export class PullToRefreshComponent implements OnInit {
 
   ngOnInit() {
 
-    this.elementScrollable = document.querySelector(this.config.target);
+    this.elementScrollable = document.querySelector(this.target);
 
     window.addEventListener('touchstart', this.onTouchStart.bind(this), {passive: true});
     window.addEventListener('touchmove', this.onToucMove.bind(this), {passive: true});
@@ -106,7 +99,7 @@ export class PullToRefreshComponent implements OnInit {
 
   getScrollTop() {
 
-    if (this.config.target === 'body') {
+    if (this.target === 'body') {
       return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     }
 
@@ -123,6 +116,7 @@ export class PullToRefreshComponent implements OnInit {
     this.reset();
 
     this.startY = $e.touches[0].pageY;
+    this.startX = $e.touches[0].pageX;
 
   }
 
@@ -138,12 +132,13 @@ export class PullToRefreshComponent implements OnInit {
 
     if (this.getScrollTop() > 0) {
       this.isFirstTime = true;
-      // console.log('impostato firstime true');
     }
 
-    const shift = (this.moveY - this.startY);
+    const shiftY = (this.moveY - this.startY);
+    const shiftX = (this.moveX - this.startX);
+    const ratio = Math.abs(shiftX)/Math.abs(shiftY);
 
-    if (this.getScrollTop() === 0 && this.moveY >= this.startY) {
+    if (this.getScrollTop() === 0 && this.moveY >= this.startY && ratio <= 0.3) {
 
       setTimeout(() => {
         this.elementScrollable.style.overflowY = 'hidden';
@@ -152,7 +147,7 @@ export class PullToRefreshComponent implements OnInit {
 
       if (this.isFirstTime) {
 
-        this.pullFirst = shift >= this.maxFirstPull ? this.maxFirstPull : shift;
+        this.pullFirst = shiftY >= this.maxFirstPull ? this.maxFirstPull : shiftY;
 
         const width = this.elementScrollable.offsetWidth;
         const x = parseInt(((100 * this.moveX) / width).toString(), 10);
@@ -175,9 +170,9 @@ export class PullToRefreshComponent implements OnInit {
 
       } else {
 
-        const pullShift = shift / 2;
+        const pullShiftY = shiftY / 2;
 
-        this.pull = (pullShift >= this.maxPull) ? this.maxPull : pullShift + ((this.maxPull - pullShift) * 0.5);
+        this.pull = (pullShiftY >= this.maxPull) ? this.maxPull : pullShiftY + ((this.maxPull - pullShiftY) * 0.5);
 
         this.rotation = (360 * this.pull) / this.maxPull;
 
