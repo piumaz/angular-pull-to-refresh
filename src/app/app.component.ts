@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PullToRefreshService } from '@piumaz/pull-to-refresh';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,12 @@ export class AppComponent {
 
     pullToRefreshService.refresh$().subscribe(() => {
       console.log('refresh by observable');
+
+      setTimeout(() => {
+        console.log('dismiss by service');
+        pullToRefreshService.dismiss();
+      }, 5000);
+
     });
 
     document.addEventListener('pull-to-refresh', () => {

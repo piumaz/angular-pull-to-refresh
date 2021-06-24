@@ -34,7 +34,8 @@ Type | Name | Default
 @Input | color | #353535
 @Input | target | body
 @Input | disabled | false
-@Output | refresh |
+@Input | autoDismiss | true
+@Output | refresh | 
 
 ## Service
 
@@ -55,6 +56,12 @@ export class AppComponent {
   }
 }
 ```
+
+If you set autoDismiss as false in the component, you can dismiss by service:
+```
+pullToRefreshService.dismiss();
+```
+
 ## Event
 
 An event dispatches too, when user pulls to refresh:

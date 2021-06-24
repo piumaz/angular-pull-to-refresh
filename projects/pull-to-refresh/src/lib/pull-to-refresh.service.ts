@@ -7,9 +7,11 @@ import {Subject, Observable} from 'rxjs';
 export class PullToRefreshService {
 
   private refresh: Subject<boolean>;
+  private reset: Subject<boolean>;
 
   constructor() {
     this.refresh = new Subject<boolean>();
+    this.reset = new Subject<boolean>();
   }
 
   public refresh$(): Observable<boolean> {
@@ -18,5 +20,13 @@ export class PullToRefreshService {
 
   public pull(): void {
     this.refresh.next(true);
+  }
+
+  public reset$(): Observable<boolean> {
+    return this.reset.asObservable();
+  }
+
+  public dismiss(): void {
+    this.reset.next(true);
   }
 }
