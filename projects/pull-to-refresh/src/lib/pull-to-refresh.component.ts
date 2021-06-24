@@ -1,21 +1,24 @@
 /* tslint:disable:no-trailing-whitespace */
-import {Component, OnInit, EventEmitter, Output, Input, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input, ElementRef, HostListener, ViewChild, OnDestroy} from '@angular/core';
 import {PullToRefreshService} from './pull-to-refresh.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'pull-to-refresh',
   templateUrl: './pull-to-refresh.component.html',
   styleUrls: ['./pull-to-refresh.component.scss']
 })
-export class PullToRefreshComponent implements OnInit {
+export class PullToRefreshComponent implements OnInit, OnDestroy {
 
   @Input() color: string = '#353535';
   @Input() target: string = 'body';
   @Input() disabled: boolean = false;
+  @Input() autoDismiss: boolean = true;
 
   @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
 
 
+  resetSub: Subscription;
 
   /**
    * Stato attivazione
@@ -95,6 +98,15 @@ export class PullToRefreshComponent implements OnInit {
     window.addEventListener('touchend', this.onTouchEnd.bind(this), {passive: true});
     window.addEventListener('touchcancel', this.onTouchEnd.bind(this), {passive: true});
 
+    if ( !this.autoDismiss ) {
+      this.resetSub = this.refreshService.reset$().subscribe(() => {
+        this.dismiss();
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.resetSub.unsubscribe();
   }
 
   getScrollTop() {
@@ -199,17 +211,21 @@ export class PullToRefreshComponent implements OnInit {
       this.refreshService.pull();
       this.refresh.emit();
 
+      if ( this.autoDismiss ) {
+        this.dismiss();
+      }
 
-      setTimeout(() => {
-
-        this.reset();
-
-      }, 1500);
 
     } else {
       this.reset();
     }
 
+  }
+
+  dismiss() {
+    setTimeout(() => {
+      this.reset();
+    }, 1500);
   }
 
   reset() {

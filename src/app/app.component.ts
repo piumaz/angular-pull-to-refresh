@@ -13,6 +13,12 @@ export class AppComponent {
 
     pullToRefreshService.refresh$().subscribe(() => {
       console.log('refresh by observable');
+
+      setTimeout(() => {
+        console.log('dismiss by service');
+        pullToRefreshService.dismiss();
+      }, 5000);
+
     });
 
     document.addEventListener('pull-to-refresh', () => {
