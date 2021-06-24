@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PullToRefreshService } from '@piumaz/pull-to-refresh';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
