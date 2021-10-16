@@ -1,5 +1,5 @@
 # Angular Pull-To-Refresh
 
-Provides an Angular component and service, for the Pull-To-Refresh feature like on Chrome.
+It provides an Angular component and a service, for the Pull-To-Refresh feature.
 
 <a href="/projects/pull-to-refresh/">Documentation</a>

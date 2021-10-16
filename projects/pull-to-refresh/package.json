@@ -1,7 +1,7 @@
 {
   "name": "@piumaz/pull-to-refresh",
   "description": "It provides an Angular component and a service, for the Pull-To-Refresh feature.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "index.js",
   "repository": {
     "type": "git",
