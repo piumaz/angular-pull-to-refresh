@@ -10,6 +10,11 @@ import {Subscription} from 'rxjs';
 })
 export class PullToRefreshComponent implements OnInit, OnDestroy {
 
+  /**
+   * Spostamento in pixel che attiva il refresh
+   */
+  @Input('sensitivity') pullToRefresh: number = 90;
+
   @Input() color: string = '#353535';
   @Input() target: string = 'body';
   @Input() disabled: boolean = false;
@@ -73,10 +78,6 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
    */
   animateY = 80;
 
-  /**
-   * Spostamento in pixel che attiva il refresh
-   */
-  pullToRefresh = 90;
 
   radiusLeft = 0;
   radiusRight = 0;
@@ -106,7 +107,9 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.resetSub.unsubscribe();
+    if (this.resetSub) {
+      this.resetSub.unsubscribe();
+    }
   }
 
   getScrollTop() {

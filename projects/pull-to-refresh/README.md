@@ -31,6 +31,7 @@ Add the component in your template.
 
 Type | Name | Default
 --- | --- | ---
+@Input | sensitivity | 90
 @Input | color | #353535
 @Input | target | body
 @Input | disabled | false
