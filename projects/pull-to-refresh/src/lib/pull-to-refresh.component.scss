@@ -2,76 +2,77 @@
   html, body {
     overscroll-behavior-y: none;
   }
-  .pull {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
-    z-index: 1060;
-    width: 100%;
-    padding: 0;
-    left:0;
-    right:0;
-    text-align: center;
-    overflow:hidden;
+}
+
+.pull {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  z-index: 1060;
+  width: 100%;
+  padding: 0;
+  left:0;
+  right:0;
+  text-align: center;
+  overflow:hidden;
+  height:60px;
+  top: -60px;
+  transform: translateY(-60px);
+  transition: transform 200ms;
+
+  will-change: transform, opacity;
+
+  &.first {
+    transition: transform 300ms;
+    background-color: rgba(53, 53, 53, 0.3);
+    opacity: 0.5;
     height:60px;
-    top: -60px;
-    transform: translateY(-60px);
-    transition: transform 200ms;
+    top:-60px;
+    border-radius: 0%/0px 0px 0px 0px;
+  }
 
+  .rotate {
+    transition: transform 300ms;
     will-change: transform, opacity;
+    background-color:#fff;
+    border:1px solid rgba(53, 53, 53, 0.3);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    padding: 6px;
+    height: 25px;
+    width: 25px;
+    display:inline-block;
+    box-sizing: content-box;
+  }
 
-    &.first {
-      transition: transform 300ms;
-      background-color: rgba(53, 53, 53, 0.3);
-      opacity: 0.5;
-      height:60px;
-      top:-60px;
-      border-radius: 0%/0px 0px 0px 0px;
+  .spinner {
+    height: 25px;
+    width: 25px;
+    display:inline-block;
+
+    svg {
+      height: 100%;
+      width: 100%;
     }
 
-    .rotate {
-      transition: transform 300ms;
-      will-change: transform, opacity;
-      background-color:#fff;
-      border:1px solid rgba(53, 53, 53, 0.3);
-      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
-      border-radius: 100px;
-      padding: 6px;
-      height: 25px;
-      width: 25px;
-      display:inline-block;
-      box-sizing: content-box;
-    }
-
-    .spinner {
-      height: 25px;
-      width: 25px;
-      display:inline-block;
-
-      svg {
-        height: 100%;
-        width: 100%;
-      }
-
-      &.spin-animation {
-        animation-name: spin;
-        animation-duration: 1000ms;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-      }
-
+    &.spin-animation {
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
     }
 
   }
 
-  @keyframes spin {
-    from {
-      transform:rotate(0deg);
-    }
-    to {
-      transform:rotate(360deg);
-    }
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
   }
 }
 

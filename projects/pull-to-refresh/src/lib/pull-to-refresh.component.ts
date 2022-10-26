@@ -1,12 +1,22 @@
-/* tslint:disable:no-trailing-whitespace */
-import {Component, OnInit, EventEmitter, Output, Input, ElementRef, HostListener, ViewChild, OnDestroy} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  Input,
+  HostListener,
+  OnDestroy,
+  ChangeDetectionStrategy, ChangeDetectorRef, Inject
+} from '@angular/core';
 import {PullToRefreshService} from './pull-to-refresh.service';
 import {Subscription} from 'rxjs';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'pull-to-refresh',
   templateUrl: './pull-to-refresh.component.html',
-  styleUrls: ['./pull-to-refresh.component.scss']
+  styleUrls: ['./pull-to-refresh.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PullToRefreshComponent implements OnInit, OnDestroy {
 
@@ -84,20 +94,18 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
 
   isFirstTime = true;
 
-  constructor(
-      private refreshService: PullToRefreshService
-  ) {
+  private window: Window;
 
+  constructor(
+      private refreshService: PullToRefreshService,
+      private changeDetectorRef: ChangeDetectorRef,
+      @Inject(DOCUMENT) readonly document
+  ) {
+    this.window = this.document.defaultView;
   }
 
   ngOnInit() {
-
-    this.elementScrollable = document.querySelector(this.target);
-
-    window.addEventListener('touchstart', this.onTouchStart.bind(this), {passive: true});
-    window.addEventListener('touchmove', this.onToucMove.bind(this), {passive: true});
-    window.addEventListener('touchend', this.onTouchEnd.bind(this), {passive: true});
-    window.addEventListener('touchcancel', this.onTouchEnd.bind(this), {passive: true});
+    this.elementScrollable = this.document.querySelector(this.target);
 
     if ( !this.autoDismiss ) {
       this.resetSub = this.refreshService.reset$().subscribe(() => {
@@ -115,13 +123,14 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
   getScrollTop() {
 
     if (this.target === 'body') {
-      return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      return this.window.pageYOffset || this.document.documentElement.scrollTop || this.document.body.scrollTop || 0;
     }
 
     return this.elementScrollable.scrollTop;
 
   }
 
+  @HostListener('window:touchstart', ['$event'])
   onTouchStart($e) {
 
     if (this.disabled || this.activated) {
@@ -135,6 +144,7 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
 
   }
 
+  @HostListener('window:touchmove', ['$event'])
   onToucMove($e) {
 
     if (this.disabled) {
@@ -196,12 +206,11 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
       }
 
     }
-
-
   }
 
+  @HostListener('window:touchend', ['$event'])
+  @HostListener('window:touchcancel', ['$event'])
   onTouchEnd($e) {
-
     if (this.disabled) {
       return;
     }
@@ -210,7 +219,7 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
       this.spin = true;
       this.pull = this.animateY;
 
-      document.dispatchEvent(new Event('pull-to-refresh'));
+      this.document.dispatchEvent(new Event('pull-to-refresh'));
       this.refreshService.pull();
       this.refresh.emit();
 
@@ -243,5 +252,7 @@ export class PullToRefreshComponent implements OnInit, OnDestroy {
     this.activated = false;
     this.pull = 0;
     this.pullFirst = 0;
+
+    this.changeDetectorRef.detectChanges();
   }
 }
